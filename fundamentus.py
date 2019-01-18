@@ -85,7 +85,7 @@ def get_data(*args, **kwargs):
                                                                        'ROE': rows.getchildren()[15].text,
                                                                        'Liq.2m.': rows.getchildren()[16].text,
                                                                        'PL': rows.getchildren()[17].text,
-                                                                       'Div.Brut/Pat.': rows.getchildren()[18].text,
+                                                                       'DivBrut/PL': rows.getchildren()[18].text,
                                                                        'Cresc.5a': rows.getchildren()[19].text}})
     
     return lista
@@ -110,7 +110,7 @@ if __name__ == '__main__':
                                                                                                                                           'Liq.Corr.',
                                                                                                                                           'ROIC',
                                                                                                                                           'ROE',
-                                                                                                                                          'Div.Brut/Pat.',
+                                                                                                                                          'DivBrut/PL',
                                                                                                                                           'Cresc.5a'))
     
     print('-'*154)
@@ -128,6 +128,6 @@ if __name__ == '__main__':
                                                                                                                                               v['Liq.Corr.'],
                                                                                                                                               v['ROIC'],
                                                                                                                                               v['ROE'],
-                                                                                                                                              v['Div.Brut/Pat.'],
+                                                                                                                                              v['DivBrut/PL'],
                                                                                                                                               v['Cresc.5a']))
 
