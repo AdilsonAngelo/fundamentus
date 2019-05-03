@@ -9,24 +9,35 @@ app = Flask(__name__)
 CORS(app)
 
 # First update
-lista, dia = dict(get_data()), datetime.strftime(datetime.today(), '%d')
+lista, hora = dict(get_data()), datetime.now().hour
 
 
 @app.route("/")
 def json_api():
-    global lista, dia
+    global lista, hora
     setor = request.args.get('setor')
 
     # Then only update once a day
-    if not setor:
-        if dia == datetime.strftime(datetime.today(), '%d'):
-            return jsonify(lista)
-        else:
-            lista, dia = dict(get_data()), datetime.strftime(datetime.today(), '%d')
-            return jsonify(lista)
+    if not setor and hora < datetime.now().hour:
+        lista, dia = dict(get_data()), datetime.now().hour
     else:
-        lista, dia = dict(get_data(setor=setor)), datetime.strftime(datetime.today(), '%d')
-        return jsonify(lista)
+        lista, dia = dict(get_data(setor=setor)), datetime.now().hour
+    return jsonify(lista)
+
+
+@app.route('/cotacao')
+def cotacao():
+    global lista, hora
+    ticker = request.args.get('ticker')
+
+    if hora < datetime.now().hour:
+        lista, dia = dict(get_data()), datetime.now().hour
+
+    if ticker == None or ticker not in lista:
+        return '0.0'
+    else:
+        ticker = ticker.upper()
+        return lista[ticker]['cotacao'].replace(',', '.')
 
 
 if __name__ == '__main__':
