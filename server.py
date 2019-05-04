@@ -34,7 +34,7 @@ def cotacao():
         lista, dia = dict(get_data()), datetime.now().hour
 
     if ticker == None or ticker not in lista:
-        return '0.0'
+        return 'ticker not found'
     else:
         ticker = ticker.upper()
         return lista[ticker]['cotacao'].replace(',', '.')
