@@ -33,7 +33,7 @@ def cotacao():
     if hora < datetime.now().hour:
         lista, dia = dict(get_data()), datetime.now().hour
 
-    if ticker == None or ticker not in lista:
+    if ticker == None or ticker.upper() not in lista:
         return 'ticker not found'
     else:
         ticker = ticker.upper()
